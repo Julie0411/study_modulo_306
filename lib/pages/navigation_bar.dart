@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:study_modulo_306/pages/navigation_card.dart';
 
-class NavigationCards extends StatelessWidget {
-  const NavigationCards({super.key});
+class StudyNavigationBar extends StatelessWidget {
+  const StudyNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {

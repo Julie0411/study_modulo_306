@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_modulo_306/pages/pomodoro_timer.dart';
 import 'header.dart';
-import 'navigator.dart';
+import 'navigation_bar.dart';
 
 class StudyHomePage extends StatelessWidget {
   const StudyHomePage({super.key});
@@ -29,7 +29,7 @@ class StudyHomePage extends StatelessWidget {
               children: [
                 StudyHeader(),
                 SizedBox(height: 30),
-                NavigationCards(),
+                StudyNavigationBar(),
                 SizedBox(height: 30),
                 PomodoroTimerCard(),
                 SizedBox(height: 1000),
