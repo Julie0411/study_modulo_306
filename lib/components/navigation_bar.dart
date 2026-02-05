@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_modulo_306/pages/navigation_card.dart';
+import 'package:study_modulo_306/components/navigation_card.dart';
 
 class StudyNavigationBar extends StatelessWidget {
   const StudyNavigationBar({super.key});
@@ -10,7 +10,7 @@ class StudyNavigationBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         NavigationCard(
-          icon: Icons.timer,
+          icon: Icons.timer_outlined,
           label: 'Pomodoro',
         ),
         NavigationCard(

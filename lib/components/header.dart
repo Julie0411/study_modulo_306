@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 
 class StudyHeader extends StatelessWidget {
   const StudyHeader({super.key});
@@ -24,9 +23,7 @@ class StudyHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-
       ],
     );
   }
 }
-

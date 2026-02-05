@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:study_modulo_306/pages/pomodoro_timer.dart';
-import 'header.dart';
-import 'navigation_bar.dart';
+import 'package:study_modulo_306/components/pomodoro_timer.dart';
+import '../components/header.dart';
+import '../components/navigation_bar.dart';
 
 class StudyHomePage extends StatelessWidget {
   const StudyHomePage({super.key});
