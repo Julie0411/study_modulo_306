@@ -1,16 +1,43 @@
-# study_modulo_306
+# 📱 Study — Modulo 306
 
-A new Flutter project.
+App Flutter in sviluppo per supportare lo studio con strumenti semplici e pratici:  
+**timer**, **task** e **flashcard generate con AI** tramite API.
 
-## Getting Started
+## 🧩 Obiettivo del progetto
 
-This project is a starting point for a Flutter application.
+Questo progetto nasce per:
+- Progetto di scuola
+- costruire un’app reale, sviluppata step by step
+- imparare navigazione, UI e gestione stato
+- integrare un’API esterna (AI) in modo pulito e sicuro
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Funzionalità (in sviluppo)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- ⏱️ **Timer studio** (sessioni focus / pausa)
+- ✅ **Task** per organizzare lo studio
+- 🧠 **Flashcard generate con AI** tramite API (partendo da testo/argomento)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Nota: il progetto è in crescita: alcune feature non sono terminate.
+
+## 🛠️ Tecnologie utilizzate
+
+- **Framework:** Flutter  
+- **Linguaggio:** Dart  
+- **Target:** Android / iOS  
+- **AI:** integrazione tramite API
+
+## 🚀 Prova l'app
+
+### Requisiti
+- Flutter SDK installato
+- Emulatore o dispositivo fisico
+- VS Code / Android Studio
+
+### Installazione dipendenze
+```bash
+flutter pub get
+```
+### Installazione dipendenze
+```bash
+flutter run
+```
