@@ -1,11 +1,37 @@
 import 'package:flutter/material.dart';
 
-class NavigationCard extends StatelessWidget {
+class NavigationCards extends StatelessWidget {
+  const NavigationCards({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _NavigationCard(
+          icon: Icons.timer,
+          label: 'Pomodoro',
+          isSelected: true,
+        ),
+        _NavigationCard(
+          icon: Icons.check_box_outlined,
+          label: 'Tasks',
+        ),
+        _NavigationCard(
+          icon: Icons.lightbulb_outline,
+          label: 'Flashcards',
+        ),
+      ],
+    );
+  }
+}
+
+class _NavigationCard extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool isSelected;
 
-  const NavigationCard({
+  const _NavigationCard({
     required this.icon,
     required this.label,
     this.isSelected = false,
@@ -35,9 +61,9 @@ class NavigationCard extends StatelessWidget {
         child: Column(
           children: [
             Icon(
-                icon,
-                color: isSelected ? Colors.deepPurple : Colors.grey[700],
-                size: 28
+              icon,
+              color: isSelected ? Colors.deepPurple : Colors.grey[700],
+              size: 28,
             ),
             const SizedBox(height: 8),
             Text(

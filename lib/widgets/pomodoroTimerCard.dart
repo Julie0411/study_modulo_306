@@ -25,7 +25,6 @@ class PomodoroTimerCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               Text(
                 'Focus Time',
                 style: TextStyle(
@@ -37,7 +36,6 @@ class PomodoroTimerCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 25),
-
           const Text(
             '25:00',
             style: TextStyle(
@@ -48,11 +46,11 @@ class PomodoroTimerCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 25),
-
           LinearProgressIndicator(
             value: 0.8,
             backgroundColor: Colors.deepPurple[100],
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple.shade300),
+            valueColor:
+            AlwaysStoppedAnimation<Color>(Colors.deepPurpleAccent),
             minHeight: 8,
             borderRadius: BorderRadius.circular(4),
           ),
@@ -61,36 +59,41 @@ class PomodoroTimerCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: () {
-                  debugPrint('Start Pomodoro!');
-                },
+                onPressed: () => debugPrint('Start Pomodoro!'),
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Start'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple.shade300,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(width: 20),
               OutlinedButton.icon(
-                onPressed: () {
-                  debugPrint('Reset Pomodoro!');
-                },
+                onPressed: () => debugPrint('Reset Pomodoro!'),
                 icon: const Icon(Icons.refresh),
                 label: const Text('Reset'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.deepPurple.shade400,
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  side: BorderSide(color: Colors.deepPurple.shade200, width: 2),
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  side: BorderSide(
+                      color: Colors.deepPurple.shade200, width: 2),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

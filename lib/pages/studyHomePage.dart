@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:study_modulo_306/components/pomodoro_timer.dart';
-import '../components/header.dart';
-import '../components/navigation_bar.dart';
+import '../widgets/navigationCard.dart';
+import '../widgets/pomodoroTimerCard.dart';
+import '../widgets/studyHeader.dart';
 
 class StudyHomePage extends StatelessWidget {
   const StudyHomePage({super.key});
@@ -27,9 +27,9 @@ class StudyHomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                StudyHeader(),
+                StudySpaceHeader(),
                 SizedBox(height: 30),
-                StudyNavigationBar(),
+                NavigationCards(),
                 SizedBox(height: 30),
                 PomodoroTimerCard(),
                 SizedBox(height: 1000),
