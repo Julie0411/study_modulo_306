@@ -47,6 +47,7 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
