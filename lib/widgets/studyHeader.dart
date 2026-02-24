@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class StudySpaceHeader extends StatelessWidget {
-  const StudySpaceHeader({super.key});
+class StudyHeader extends StatelessWidget {
+  const StudyHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:study_modulo_306/pages/pomodoroPage.dart';
+import 'package:study_modulo_306/pages/taskPage.dart';
 import '../widgets/navigationCard.dart';
-import '../widgets/pomodoroTimerCard.dart';
 import '../widgets/studyHeader.dart';
+import 'flashcardPage.dart';
 
-class StudyHomePage extends StatelessWidget {
+class StudyHomePage extends StatefulWidget {
+
   const StudyHomePage({super.key});
+
+  @override
+  State<StudyHomePage> createState() => _StudySpaceHomePageState();
+
+}
+
+class _StudySpaceHomePageState extends State<StudyHomePage> {
+
+  int selectedIndex = 0;
+
+  final List<Widget> pages = const [
+    PomodoroPage(),
+    TasksPage(),
+    FlashcardsPage(),
+  ];
+
+  void handleSelected(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +45,23 @@ class StudyHomePage extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: const SafeArea(
+        child: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                StudySpaceHeader(),
-                SizedBox(height: 30),
-                NavigationCards(),
-                SizedBox(height: 30),
-                PomodoroTimerCard(),
+                const StudyHeader(),
+                const SizedBox(height: 30),
+                NavigationCards(
+                  selectedIndex: selectedIndex,
+                  onSelected: handleSelected,
+                ),
+                const SizedBox(height: 30),
+                IndexedStack(
+                  index: selectedIndex,
+                  children: pages,
+                ),
                 SizedBox(height: 1000),
               ],
             ),
