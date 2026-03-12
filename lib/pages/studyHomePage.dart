@@ -63,7 +63,7 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
                   index: selectedIndex,
                   children: pages,
                 ),
-                SizedBox(height: 1000),
+                SizedBox(height: 200),
               ],
             ),
           ),
