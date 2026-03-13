@@ -1,7 +1,52 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
-class PomodoroTimerCard extends StatelessWidget {
+class PomodoroTimerCard extends StatefulWidget {
   const PomodoroTimerCard({super.key});
+
+  @override
+  State<PomodoroTimerCard> createState() => _PomodoroTimerCardState();
+
+}
+
+class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
+
+  Timer? _timer;
+
+  int _remainingSeconds = 5;
+  int _totalSeconds = 5;
+
+  int _sessionsCompleted = 0;
+
+  bool _isRunning = false;
+
+  void startTimer() {
+    if (_isRunning) return;
+
+    _isRunning = true;
+
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+          (timer) {
+        setState(() {
+          if (_remainingSeconds > 0) {
+            _remainingSeconds--;
+          } else {
+            timer.cancel();
+            _isRunning = false;
+            _sessionsCompleted++;
+          }
+        });
+      },
+    );
+  }
+
+  String formatTime(int seconds) {
+    final minutes = seconds ~/ 60;
+    final remainingSeconds = seconds % 60;
+
+    return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +81,9 @@ class PomodoroTimerCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          const Text(
-            '25:00',
-            style: TextStyle(
+          Text(
+            formatTime(_remainingSeconds),
+            style: const TextStyle(
               fontSize: 70,
               fontWeight: FontWeight.bold,
               color: Colors.deepPurple,
@@ -47,7 +92,7 @@ class PomodoroTimerCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           LinearProgressIndicator(
-            value: 1,
+            value: (_totalSeconds - _remainingSeconds) / _totalSeconds,
             backgroundColor: Colors.deepPurple[100],
             valueColor:
             AlwaysStoppedAnimation<Color>(Colors.deepPurple),
@@ -59,7 +104,7 @@ class PomodoroTimerCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: () => debugPrint('Start timer!'),
+                onPressed: startTimer,
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Start'),
                 style: ElevatedButton.styleFrom(
@@ -100,7 +145,7 @@ class PomodoroTimerCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            'Sessions completed: 0',
+            'Sessions completed: $_sessionsCompleted',
             style: TextStyle(
               fontSize: 15,
               color: Colors.deepPurple.shade600,
@@ -110,4 +155,5 @@ class PomodoroTimerCard extends StatelessWidget {
       ),
     );
   }
+
 }
