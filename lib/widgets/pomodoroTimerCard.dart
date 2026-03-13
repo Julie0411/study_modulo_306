@@ -9,14 +9,14 @@ class PomodoroTimerCard extends StatelessWidget {
       padding: const EdgeInsets.all(25.0),
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white54,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
+            color: Colors.deepPurple.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 10,
-            offset: const Offset(0, 5),
+            offset: const Offset(0, 1),
           ),
         ],
       ),
@@ -35,40 +35,40 @@ class PomodoroTimerCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 10),
           const Text(
             '25:00',
             style: TextStyle(
               fontSize: 70,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
-              letterSpacing: 2,
+              color: Colors.deepPurple,
+              letterSpacing: 5,
             ),
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 20),
           LinearProgressIndicator(
-            value: 0.8,
+            value: 1,
             backgroundColor: Colors.deepPurple[100],
             valueColor:
-            AlwaysStoppedAnimation<Color>(Colors.deepPurpleAccent),
-            minHeight: 8,
-            borderRadius: BorderRadius.circular(4),
+            AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+            minHeight: 12,
+            borderRadius: BorderRadius.circular(20),
           ),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: () => debugPrint('Start Pomodoro!'),
+                onPressed: () => debugPrint('Start timer!'),
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Start'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple.shade300,
+                  backgroundColor: Colors.deepPurple,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25, vertical: 15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   textStyle: const TextStyle(
                     fontSize: 16,
@@ -78,7 +78,7 @@ class PomodoroTimerCard extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               OutlinedButton.icon(
-                onPressed: () => debugPrint('Reset Pomodoro!'),
+                onPressed: () => debugPrint('Reset timer!'),
                 icon: const Icon(Icons.refresh),
                 label: const Text('Reset'),
                 style: OutlinedButton.styleFrom(
@@ -86,10 +86,10 @@ class PomodoroTimerCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25, vertical: 15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   side: BorderSide(
-                      color: Colors.deepPurple.shade200, width: 2),
+                      color: Colors.deepPurple.shade400, width: 3),
                   textStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class PomodoroTimerCard extends StatelessWidget {
             'Sessions completed: 0',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.grey[600],
+              color: Colors.deepPurple.shade600,
             ),
           ),
         ],

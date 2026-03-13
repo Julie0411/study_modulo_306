@@ -5,24 +5,23 @@ class StudyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.school, size: 40, color: Colors.deepPurple[400]),
-            const SizedBox(width: 10),
-            Text(
-              'StudySpace',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple[700],
-              ),
-            ),
-          ],
+        Icon(
+          Icons.school,
+          size: 70,
+          color: Colors.deepPurple[400],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(width: 10),
+        Text(
+          'StudySpace',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.deepPurple[700],
+          ),
+        ),
       ],
     );
   }
