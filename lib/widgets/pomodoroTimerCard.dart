@@ -41,6 +41,15 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
     );
   }
 
+  void resetTimer() {
+    _timer?.cancel();
+
+    setState(() {
+      _remainingSeconds = _totalSeconds;
+      _isRunning = false;
+    });
+  }
+
   String formatTime(int seconds) {
     final minutes = seconds ~/ 60;
     final remainingSeconds = seconds % 60;
@@ -75,7 +84,7 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.deepPurple[700],
+                  color: Colors.deepPurple[400],
                 ),
               ),
             ],
@@ -83,10 +92,10 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
           const SizedBox(height: 10),
           Text(
             formatTime(_remainingSeconds),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 70,
               fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
+              color: Colors.deepPurple[400],
               letterSpacing: 5,
             ),
           ),
@@ -95,7 +104,7 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
             value: (_totalSeconds - _remainingSeconds) / _totalSeconds,
             backgroundColor: Colors.deepPurple[100],
             valueColor:
-            AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+            AlwaysStoppedAnimation<Color>(Colors.deepPurple.shade400),
             minHeight: 12,
             borderRadius: BorderRadius.circular(20),
           ),
@@ -108,7 +117,7 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('Start'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Colors.deepPurple[400],
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25, vertical: 15),
@@ -122,19 +131,18 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
                 ),
               ),
               const SizedBox(width: 20),
-              OutlinedButton.icon(
-                onPressed: () => debugPrint('Reset timer!'),
+              ElevatedButton.icon(
+                onPressed: resetTimer,
                 icon: const Icon(Icons.refresh),
                 label: const Text('Reset'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.deepPurple.shade400,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[400],
+                  foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  side: BorderSide(
-                      color: Colors.deepPurple.shade400, width: 3),
                   textStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -148,7 +156,7 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
             'Sessions completed: $_sessionsCompleted',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.deepPurple.shade600,
+              color: Colors.deepPurple.shade400,
             ),
           ),
         ],
