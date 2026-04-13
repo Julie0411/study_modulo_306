@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../widgets/placeholderCard.dart';
+import '../widgets/flashcardCard.dart';
 
 class FlashcardsPage extends StatelessWidget {
   const FlashcardsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const PlaceholderCard(title: 'Flashcards');
+    return const FlashcardCard(title: 'Flashcards');
   }
 }
