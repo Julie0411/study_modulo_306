@@ -45,19 +45,20 @@ class _FlashcardCardState extends State<FlashcardCard> {
       padding: const EdgeInsets.all(20.0),
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white54,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
+            color: Colors.deepPurple.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 10,
-            offset: const Offset(0, 5),
+            offset: const Offset(0, 1),
           ),
         ],
       ),
       child: Column(
         children: [
+          Text('${currentIndex + 1} / ${flashcards.length}'),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: FlashCard(
@@ -95,7 +96,7 @@ class _FlashcardCardState extends State<FlashcardCard> {
                 label: const Text('Indietro'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
-                  foregroundColor: Colors.white,
+                  foregroundColor: Colors.purple[50],
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25,
                       vertical: 15
@@ -121,7 +122,7 @@ class _FlashcardCardState extends State<FlashcardCard> {
                 label: const Text('Avanti'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
-                  foregroundColor: Colors.white,
+                  foregroundColor: Colors.purple[50],
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25,
                       vertical: 15
