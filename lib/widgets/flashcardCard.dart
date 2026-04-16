@@ -66,14 +66,14 @@ class _FlashcardCardState extends State<FlashcardCard> {
               height: MediaQuery.of(context).size.height / 4,
               frontWidget: Center(
                 child: Text(
-                  "ciao",
+                  'Risposta:\n ${flashcards[currentIndex]['back']}',
                   style: flashcardTheme,
                   textAlign: TextAlign.center,
                 ),
               ),
               backWidget: Center(
                 child: Text(
-                  "Hello",
+                  'Domanda:\n ${flashcards[currentIndex]['front']}',
                   style: flashcardTheme,
                   textAlign: TextAlign.center,
                 ),
@@ -86,11 +86,11 @@ class _FlashcardCardState extends State<FlashcardCard> {
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                  setState(() {
-                    if (currentIndex > 0) {
-                      currentIndex++;
-                    }
-                  });
+                  if (currentIndex > 0) {
+                    setState(() {
+                      currentIndex--;
+                    });
+                  }
                 },
                 icon: const Icon(Icons.arrow_back),
                 label: const Text('Indietro'),
@@ -112,12 +112,12 @@ class _FlashcardCardState extends State<FlashcardCard> {
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  setState(() {
-                    if (currentIndex > 0) {
+                  if (currentIndex < (flashcards.length - 1)) {
+                    setState(() {
                       currentIndex++;
-                    }
-                  });
-                  },
+                    });
+                  }
+                },
                 icon: const Icon(Icons.arrow_forward),
                 label: const Text('Avanti'),
                 style: ElevatedButton.styleFrom(
