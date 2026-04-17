@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/flashcardCard.dart';
 
-class FlashcardsPage extends StatelessWidget {
-  const FlashcardsPage({super.key});
+class FlashcardPage extends StatelessWidget {
+  const FlashcardPage({super.key});
 
   @override
   Widget build(BuildContext context) {

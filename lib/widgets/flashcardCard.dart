@@ -61,26 +61,27 @@ class _FlashcardCardState extends State<FlashcardCard> {
           Text('${currentIndex + 1} / ${flashcards.length}'),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: FlashCard(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 4,
-              frontWidget: Center(
-                child: Text(
-                  'Risposta:\n ${flashcards[currentIndex]['back']}',
-                  style: flashcardTheme,
-                  textAlign: TextAlign.center,
+            child: Material(
+              child: FlashCard(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 4,
+                frontWidget: Center(
+                  child: Text(
+                    'Risposta:\n ${flashcards[currentIndex]['back']}',
+                    style: flashcardTheme,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              backWidget: Center(
-                child: Text(
-                  'Domanda:\n ${flashcards[currentIndex]['front']}',
-                  style: flashcardTheme,
-                  textAlign: TextAlign.center,
+                backWidget: Center(
+                  child: Text(
+                    'Domanda:\n ${flashcards[currentIndex]['front']}',
+                    style: flashcardTheme,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
