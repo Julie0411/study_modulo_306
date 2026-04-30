@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import '../widgets/flashcardCard.dart';
 
 class FlashcardPage extends StatelessWidget {
-  const FlashcardPage({super.key});
+  final VoidCallback goAccessPage;
+  const FlashcardPage({super.key, required this.goAccessPage});
 
   @override
   Widget build(BuildContext context) {
-    return const FlashcardCard(title: 'Flashcards');
+    return FlashcardCard(title: 'Flashcards', goAccessPage: goAccessPage);
   }
 }

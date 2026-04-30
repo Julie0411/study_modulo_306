@@ -4,6 +4,7 @@ import 'package:study_modulo_306/pages/taskPage.dart';
 import '../widgets/navigationCard.dart';
 import '../widgets/studyHeader.dart';
 import 'apiAccessPage.dart';
+import 'flashcardPage.dart';
 
 class StudyHomePage extends StatefulWidget {
 
@@ -18,10 +19,15 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
 
   int selectedIndex = 0;
 
-  final List<Widget> pages = const [
-    PomodoroPage(),
-    TasksPage(),
-    ApiAccessPage(),
+  late final List<Widget> pages = [
+    const PomodoroPage(),
+    const TasksPage(),
+    ApiAccessPage(
+      goFlashcards: () => handleSelected(3),
+    ),
+    FlashcardPage(
+      goAccessPage: () => handleSelected(2),
+    ),
   ];
 
   void handleSelected(int index) {

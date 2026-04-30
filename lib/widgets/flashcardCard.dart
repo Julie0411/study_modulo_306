@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flash_card/flash_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FlashcardCard extends StatefulWidget {
   final String title;
+  final VoidCallback goAccessPage;
 
-  const FlashcardCard({super.key, required this.title});
+  const FlashcardCard({super.key, required this.title, required this.goAccessPage});
 
   @override
   State<FlashcardCard> createState() => _FlashcardCardState();
@@ -23,11 +25,8 @@ class _FlashcardCardState extends State<FlashcardCard> {
   }
 
   Future<void> loadFlashcards() async {
-    final response =
-    await rootBundle.loadString('assets/flashcards.json');
-
+    final response = await rootBundle.loadString('assets/flashcards.json');
     final data = jsonDecode(response);
-
     setState(() {
       flashcards = data['flashcards'];
     });
@@ -40,6 +39,13 @@ class _FlashcardCardState extends State<FlashcardCard> {
       fontWeight: FontWeight.normal,
       color: Colors.black,
     );
+
+    if (flashcards.isEmpty) {
+      return const SizedBox(
+        height: 200,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
 
     return Container(
       padding: const EdgeInsets.all(20.0),
@@ -57,27 +63,26 @@ class _FlashcardCardState extends State<FlashcardCard> {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text('${currentIndex + 1} / ${flashcards.length}'),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Material(
-              child: FlashCard(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height / 4,
-                frontWidget: Center(
-                  child: Text(
-                    'Risposta:\n ${flashcards[currentIndex]['back']}',
-                    style: flashcardTheme,
-                    textAlign: TextAlign.center,
-                  ),
+            child: FlashCard(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height / 4,
+              frontWidget: Center(
+                child: Text(
+                  'Risposta:\n ${flashcards[currentIndex]['back']}',
+                  style: flashcardTheme,
+                  textAlign: TextAlign.center,
                 ),
-                backWidget: Center(
-                  child: Text(
-                    'Domanda:\n ${flashcards[currentIndex]['front']}',
-                    style: flashcardTheme,
-                    textAlign: TextAlign.center,
-                  ),
+              ),
+              backWidget: Center(
+                child: Text(
+                  'Domanda:\n ${flashcards[currentIndex]['front']}',
+                  style: flashcardTheme,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -87,57 +92,54 @@ class _FlashcardCardState extends State<FlashcardCard> {
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                  if (currentIndex > 0) {
-                    setState(() {
-                      currentIndex--;
-                    });
-                  }
+                  if (currentIndex > 0) setState(() => currentIndex--);
                 },
                 icon: const Icon(Icons.arrow_back),
                 label: const Text('Indietro'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
                   foregroundColor: Colors.purple[50],
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 15
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  textStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  if (currentIndex < (flashcards.length - 1)) {
-                    setState(() {
-                      currentIndex++;
-                    });
-                  }
+                  if (currentIndex < flashcards.length - 1) setState(() => currentIndex++);
                 },
                 icon: const Icon(Icons.arrow_forward),
                 label: const Text('Avanti'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
                   foregroundColor: Colors.purple[50],
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 15
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  textStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-              )
+              ),
             ],
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: widget.goAccessPage,
+              icon: const Icon(CupertinoIcons.sparkles),
+                label: const Text('Genera ancora'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple[400],
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

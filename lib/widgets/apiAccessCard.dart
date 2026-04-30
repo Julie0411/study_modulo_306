@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../pages/flashcardPage.dart';
+import '../pages/studyHomePage.dart';
 
 class ApiAccessCard extends StatelessWidget {
   final String title;
+  final VoidCallback goFlashcards;
 
-  const ApiAccessCard({super.key, required this.title});
+  const ApiAccessCard({super.key, required this.title, required this.goFlashcards});
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +50,7 @@ class ApiAccessCard extends StatelessWidget {
           ),
           SizedBox(height: 25),
           ElevatedButton.icon(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FlashcardPage(),
-                ),
-              );
-            },
+            onPressed: goFlashcards,
             icon: const Icon(CupertinoIcons.sparkles),
             label: const Text('Genera le flashcard'),
             style: ElevatedButton.styleFrom(
