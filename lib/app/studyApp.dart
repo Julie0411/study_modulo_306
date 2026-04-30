@@ -13,6 +13,7 @@ class StudyApp extends StatelessWidget {
         primaryColor: Colors.deepPurple,
         fontFamily: 'Montserrat',
         useMaterial3: true,
+
       ),
       home: const StudyHomePage(),
     );
