@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:flash_card/flash_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class FlashcardCard extends StatefulWidget {
   final String title;
@@ -21,11 +22,16 @@ class _FlashcardCardState extends State<FlashcardCard> {
   @override
   void initState() {
     super.initState();
-    loadFlashcards();
+    Future.delayed(Duration(milliseconds: 300), () => loadFlashcards());
   }
 
   Future<void> loadFlashcards() async {
-    final response = await rootBundle.loadString('assets/flashcards.json');
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/flashcards.json');
+
+    if (!await file.exists()) return;
+
+    final response = await file.readAsString();
     final data = jsonDecode(response);
     setState(() {
       flashcards = data['flashcards'];
