@@ -13,8 +13,8 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
 
   Timer? _timer;
 
-  int _remainingSeconds = 5;
-  int _totalSeconds = 5;
+  int _remainingSeconds = 60;
+  final int _totalSeconds = 60;
 
   int _sessionsCompleted = 0;
 
@@ -46,6 +46,13 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
 
     setState(() {
       _remainingSeconds = _totalSeconds;
+      _isRunning = false;
+    });
+  }
+
+  void stopTimer() {
+    _timer?.cancel();
+    setState(() {
       _isRunning = false;
     });
   }
@@ -113,14 +120,13 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: startTimer,
-                icon: const Icon(Icons.play_arrow),
-                label: const Text('Start'),
+                onPressed: _isRunning ? stopTimer : startTimer,
+                icon: Icon(_isRunning ? Icons.stop : Icons.play_arrow),
+                label: Text(_isRunning ? 'Stop' : 'Start'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

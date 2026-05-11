@@ -3,6 +3,7 @@ import 'package:study_modulo_306/pages/pomodoroPage.dart';
 import 'package:study_modulo_306/pages/taskPage.dart';
 import '../widgets/navigationCard.dart';
 import '../widgets/studyHeader.dart';
+import 'apiAccessPage.dart';
 import 'flashcardPage.dart';
 
 class StudyHomePage extends StatefulWidget {
@@ -17,12 +18,14 @@ class StudyHomePage extends StatefulWidget {
 class _StudySpaceHomePageState extends State<StudyHomePage> {
 
   int selectedIndex = 0;
+  List _flashcards = [];
 
-  final List<Widget> pages = const [
-    PomodoroPage(),
-    TaskPage(),
-    FlashcardsPage(),
-  ];
+  void handleGoFlashcards(List flashcards) {
+    setState(() {
+      _flashcards = flashcards;
+      selectedIndex = 3;
+    });
+  }
 
   void handleSelected(int index) {
     setState(() {
@@ -32,6 +35,17 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const PomodoroPage(),
+      const TasksPage(),
+      ApiAccessPage(
+        goFlashcards: handleGoFlashcards,
+      ),
+      FlashcardPage(
+        flashcards: _flashcards,
+        goAccessPage: () => handleSelected(2),
+      ),
+    ];
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
