@@ -7,7 +7,7 @@ import 'dart:io';
 
 class ApiAccessCard extends StatefulWidget {
   final String title;
-  final VoidCallback goFlashcards;
+  final void Function(List flashcards) goFlashcards;
 
   const ApiAccessCard({super.key, required this.title, required this.goFlashcards});
 
@@ -57,7 +57,8 @@ class _ApiAccessCardState extends State<ApiAccessCard> {
       print('FILE SCRITTO: ${file.path}');
       print('CONTENUTO: $content');
 
-      widget.goFlashcards();
+      final decoded = jsonDecode(content);
+      widget.goFlashcards(decoded['flashcards'] as List);
       _controller.clear();
     } finally {
       setState(() => _isLoading = false);
