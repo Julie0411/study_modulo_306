@@ -18,17 +18,14 @@ class StudyHomePage extends StatefulWidget {
 class _StudySpaceHomePageState extends State<StudyHomePage> {
 
   int selectedIndex = 0;
+  List _flashcards = [];
 
-  late final List<Widget> pages = [
-    const PomodoroPage(),
-    const TasksPage(),
-    ApiAccessPage(
-      goFlashcards: () => handleSelected(3),
-    ),
-    FlashcardPage(
-      goAccessPage: () => handleSelected(2),
-    ),
-  ];
+  void handleGoFlashcards(List flashcards) {
+    setState(() {
+      _flashcards = flashcards;
+      selectedIndex = 3;
+    });
+  }
 
   void handleSelected(int index) {
     setState(() {
@@ -38,6 +35,17 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const PomodoroPage(),
+      const TasksPage(),
+      ApiAccessPage(
+        goFlashcards: handleGoFlashcards,
+      ),
+      FlashcardPage(
+        flashcards: _flashcards,
+        goAccessPage: () => handleSelected(2),
+      ),
+    ];
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(

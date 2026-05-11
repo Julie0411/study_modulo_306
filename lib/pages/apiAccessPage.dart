@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/apiAccessCard.dart';
 
 class ApiAccessPage extends StatelessWidget {
-  final VoidCallback goFlashcards;
+  final void Function(List flashcards) goFlashcards;
   const ApiAccessPage({super.key, required this.goFlashcards});
 
   @override

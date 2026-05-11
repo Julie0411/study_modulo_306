@@ -1,63 +1,38 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flash_card/flash_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FlashcardCard extends StatefulWidget {
   final String title;
+  final List flashcards;
   final VoidCallback goAccessPage;
 
-  const FlashcardCard({super.key, required this.title, required this.goAccessPage});
+  const FlashcardCard({super.key, required this.title, required this.flashcards, required this.goAccessPage});
 
   @override
   State<FlashcardCard> createState() => _FlashcardCardState();
 }
 
 class _FlashcardCardState extends State<FlashcardCard> {
-  List flashcards = [];
   int currentIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration(milliseconds: 300), () => loadFlashcards());
-  }
-
-  Future<void> loadFlashcards() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final file = File('${dir.path}/flashcards.json');
-    var jsonContent = await file.readAsString();
-    if (kDebugMode) {
-      print('FILE SCRITTO: ${file.path}');
-      print('CONTENUTO: $jsonContent');
+  void didUpdateWidget(FlashcardCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.flashcards != widget.flashcards) {
+      setState(() => currentIndex = 0);
     }
-
-    if (!await file.exists()) return;
-
-    final response = await file.readAsString();
-    final data = jsonDecode(response);
-    setState(() {
-      flashcards = data['flashcards'];
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final flashcards = widget.flashcards;
+
     final flashcardTheme = const TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.normal,
       color: Colors.black,
     );
-
-    if (flashcards.isEmpty) {
-      return const SizedBox(
-        height: 200,
-        child: Center(child: CircularProgressIndicator()),
-      );
-    }
 
     return Container(
       padding: const EdgeInsets.all(20.0),
@@ -81,6 +56,7 @@ class _FlashcardCardState extends State<FlashcardCard> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: FlashCard(
+              key: ValueKey(currentIndex),
               width: double.infinity,
               height: MediaQuery.of(context).size.height / 4,
               frontWidget: Center(
