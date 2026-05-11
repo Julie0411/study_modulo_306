@@ -20,7 +20,7 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
 
   final List<Widget> pages = const [
     PomodoroPage(),
-    TasksPage(),
+    TaskPage(),
     FlashcardsPage(),
   ];
 
