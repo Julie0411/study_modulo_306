@@ -37,7 +37,7 @@ class _StudySpaceHomePageState extends State<StudyHomePage> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       const PomodoroPage(),
-      const TasksPage(),
+      const TaskPage(),
       ApiAccessPage(
         goFlashcards: handleGoFlashcards,
       ),
