@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flash_card/flash_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,11 @@ class _FlashcardCardState extends State<FlashcardCard> {
   Future<void> loadFlashcards() async {
     final dir = await getApplicationDocumentsDirectory();
     final file = File('${dir.path}/flashcards.json');
+    var jsonContent = await file.readAsString();
+    if (kDebugMode) {
+      print('FILE SCRITTO: ${file.path}');
+      print('CONTENUTO: $jsonContent');
+    }
 
     if (!await file.exists()) return;
 
