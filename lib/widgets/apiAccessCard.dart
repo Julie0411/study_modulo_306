@@ -1,13 +1,68 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../pages/flashcardPage.dart';
-import '../pages/studyHomePage.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
 
-class ApiAccessCard extends StatelessWidget {
+class ApiAccessCard extends StatefulWidget {
   final String title;
   final VoidCallback goFlashcards;
 
   const ApiAccessCard({super.key, required this.title, required this.goFlashcards});
+
+  @override
+  State<ApiAccessCard> createState() => _ApiAccessCardState();
+}
+
+class _ApiAccessCardState extends State<ApiAccessCard> {
+  final TextEditingController _controller = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _onGenera() async {
+    final tema = _controller.text.trim();
+    if (tema.isEmpty) return;
+
+    setState(() => _isLoading = true);
+
+    try {
+      final response = await http.post(
+        Uri.parse('http://localhost:11434/api/chat'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "model": "gemma3n",
+          "stream": false,
+          "messages": [
+            {
+              "role": "system",
+              "content": """Sei un assistente che genera flashcard didattiche.
+              Rispondi SOLO con un JSON valido, senza backtick, senza markdown.
+              Formato: {"flashcards": [{"front": "domanda", "back": "risposta"}]}
+              Genera almeno 10 flashcard."""
+            },
+            {"role": "user", "content": "Genera flashcard sul tema: $tema"}
+          ]
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+      String content = data['message']['content']
+          .replaceAll('```json', '')
+          .replaceAll('```', '')
+          .trim();
+
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File('${dir.path}/flashcards.json');
+      await file.writeAsString(content);
+      print('FILE SCRITTO: ${file.path}');
+      print('CONTENUTO: $content');
+
+      widget.goFlashcards();
+      _controller.clear();
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,38 +87,30 @@ class ApiAccessCard extends StatelessWidget {
         children: [
           Text(
             'Inserisci il tema sulla quale vuoi generare le flashcard',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 25),
           TextField(
+            controller: _controller,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             ),
           ),
           SizedBox(height: 25),
-          ElevatedButton.icon(
-            onPressed: goFlashcards,
+          _isLoading
+              ? CircularProgressIndicator(color: Colors.deepPurple)
+              : ElevatedButton.icon(
+            onPressed: _onGenera,
             icon: const Icon(CupertinoIcons.sparkles),
             label: const Text('Genera le flashcard'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple[400],
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              textStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
         ],
