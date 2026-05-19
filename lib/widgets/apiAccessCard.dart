@@ -35,10 +35,11 @@ class _ApiAccessCardState extends State<ApiAccessCard> {
           "messages": [
             {
               "role": "system",
-              "content": """Sei un assistente che genera flashcard didattiche.
-              Rispondi SOLO con un JSON valido, senza backtick, senza markdown.
-              Formato: {"flashcards": [{"front": "domanda", "back": "risposta"}]}
-              Genera almeno 10 flashcard."""
+              "content": """You are an assistant that generates educational flashcards.
+              Respond ONLY with valid JSON, without backticks or Markdown.
+              Format: {“flashcards”: [{“front”: “question”, ‘back’: “answer”}]}
+              When it comes to languages, unless the user specifies otherwise, use Italian as the front and the other language as the back.
+              Generate at least 10 flashcards, but if the user provides a number of flashcards, use the number they provided"""
             },
             {"role": "user", "content": "Genera flashcard sul tema: $tema"}
           ]
@@ -94,8 +95,10 @@ class _ApiAccessCardState extends State<ApiAccessCard> {
           SizedBox(height: 25),
           TextField(
             controller: _controller,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             ),
           ),
