@@ -17,11 +17,9 @@ class TaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<TaskPage> {
   final TextEditingController _controller = TextEditingController();
-  String _selectedPriority = 'High';
+  String _selectedPriority = 'Low';
 
-  final List<MyTask> _myTasks = [
-    MyTask(title: "test 1", priority: "Low"),
-  ];
+  final List<MyTask> _myTasks = [];
 
   final Color violaTema = const Color(0xFF6A5AE0);
   final Color sfondoViolaChiaro = const Color(0xFFF8F7FF);
@@ -46,7 +44,6 @@ class _TaskPageState extends State<TaskPage> {
           ),
           child: Column(
             children: [
-              // HEADER: Titolo e Contatore
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -55,7 +52,6 @@ class _TaskPageState extends State<TaskPage> {
                 ],
               ),
               const SizedBox(height: 20),
-
               Row(
                 children: [
                   Expanded(
@@ -88,8 +84,6 @@ class _TaskPageState extends State<TaskPage> {
                 ],
               ),
               const SizedBox(height: 10),
-
-              // SELETTORE PRIORITA' (Dropdown)
               Align(
                 alignment: Alignment.centerRight,
                 child: DropdownButton<String>(
@@ -100,9 +94,7 @@ class _TaskPageState extends State<TaskPage> {
                   onChanged: (newVal) => setState(() => _selectedPriority = newVal!),
                 ),
               ),
-
               const Divider(),
-
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

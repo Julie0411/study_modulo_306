@@ -21,14 +21,11 @@ Widget taskCard({
       children: [
         Container(width: 6, height: 60, decoration: BoxDecoration(color: accentColor, borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), bottomLeft: Radius.circular(20)))),
         const SizedBox(width: 10),
-
-
         Checkbox(
           value: isDone,
           onChanged: (val) => onToggle(),
           activeColor: const Color(0xFF6A5AE0),
         ),
-        // Il testo (si sbarra se è fatto)
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +35,6 @@ Widget taskCard({
             ],
           ),
         ),
-        // Il cestino per eliminare
         IconButton(icon: const Icon(Icons.delete_outline, color: Colors.redAccent), onPressed: onDelete),
       ],
     ),

@@ -14,7 +14,7 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
   Timer? _timer;
 
   int _remainingSeconds = 60;
-  final int _totalSeconds = 60;
+  late int _totalSeconds = 60;
 
   int _sessionsCompleted = 0;
 
@@ -64,6 +64,48 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
     return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
+  Future<void> _selectTime() async {
+    final controller = TextEditingController();
+
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Set focus time'),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            labelText: 'Minutes',
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(
+              context,
+              controller.text,
+            ),
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+
+    if (result != null) {
+      final minutes = int.tryParse(result);
+
+      if (minutes != null && minutes > 0) {
+        setState(() {
+          _totalSeconds = minutes * 60;
+          _remainingSeconds = _totalSeconds;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,13 +139,16 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
             ],
           ),
           const SizedBox(height: 10),
-          Text(
-            formatTime(_remainingSeconds),
-            style: TextStyle(
-              fontSize: 70,
-              fontWeight: FontWeight.bold,
-              color: Colors.deepPurple[400],
-              letterSpacing: 5,
+          GestureDetector(
+            onTap: _isRunning ? null : _selectTime,
+            child: Text(
+              formatTime(_remainingSeconds),
+              style: TextStyle(
+                fontSize: 70,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[400],
+                letterSpacing: 5,
+              ),
             ),
           ),
           const SizedBox(height: 20),
