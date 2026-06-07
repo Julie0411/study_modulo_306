@@ -28,6 +28,10 @@ class _FlashcardCardState extends State<FlashcardCard> {
   Widget build(BuildContext context) {
     final flashcards = widget.flashcards;
 
+    if (flashcards.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     final flashcardTheme = const TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.normal,
@@ -87,23 +91,41 @@ class _FlashcardCardState extends State<FlashcardCard> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
                   foregroundColor: Colors.purple[50],
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  if (currentIndex < flashcards.length - 1) setState(() => currentIndex++);
+                  if (currentIndex < flashcards.length - 1) {
+                    setState(() => currentIndex++);
+                  }
                 },
                 icon: const Icon(Icons.arrow_forward),
                 label: const Text('Avanti'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple[400],
                   foregroundColor: Colors.purple[50],
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -114,11 +136,14 @@ class _FlashcardCardState extends State<FlashcardCard> {
             child: ElevatedButton.icon(
               onPressed: widget.goAccessPage,
               icon: const Icon(CupertinoIcons.sparkles),
-                label: const Text('Genera ancora'),
+              label: const Text('Genera ancora'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple[400],
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 15,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
