@@ -13,8 +13,8 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
 
   Timer? _timer;
 
-  int _remainingSeconds = 60;
-  late int _totalSeconds = 60;
+  int _remainingSeconds = 600;
+  late int _totalSeconds = 600;
 
   int _sessionsCompleted = 0;
 
