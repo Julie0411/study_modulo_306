@@ -9,7 +9,11 @@ class ApiAccessCard extends StatefulWidget {
   final String title;
   final void Function(List flashcards) goFlashcards;
 
-  const ApiAccessCard({super.key, required this.title, required this.goFlashcards});
+  const ApiAccessCard({
+    super.key,
+    required this.title,
+    required this.goFlashcards,
+  });
 
   @override
   State<ApiAccessCard> createState() => _ApiAccessCardState();
@@ -17,7 +21,15 @@ class ApiAccessCard extends StatefulWidget {
 
 class _ApiAccessCardState extends State<ApiAccessCard> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _textScrollController = ScrollController();
   bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _textScrollController.dispose();
+    super.dispose();
+  }
 
   Future<void> _onGenera() async {
     final tema = _controller.text.trim();
@@ -71,7 +83,6 @@ class _ApiAccessCardState extends State<ApiAccessCard> {
     return Container(
       padding: const EdgeInsets.all(20.0),
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      height: MediaQuery.of(context).size.height / 3,
       decoration: BoxDecoration(
         color: Colors.white54,
         borderRadius: BorderRadius.circular(20),
@@ -93,30 +104,49 @@ class _ApiAccessCardState extends State<ApiAccessCard> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 25),
-          TextField(
-            controller: _controller,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          Scrollbar(
+            controller: _textScrollController,
+            thumbVisibility: true,
+            child: TextField(
+              controller: _controller,
+              scrollController: _textScrollController,
+              keyboardType: TextInputType.multiline,
+              minLines: 1,
+              maxLines: 6,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 20,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
           ),
           SizedBox(height: 25),
           _isLoading
               ? CircularProgressIndicator(color: Colors.deepPurple)
               : ElevatedButton.icon(
-            onPressed: _onGenera,
-            icon: const Icon(CupertinoIcons.sparkles),
-            label: const Text('Genera le flashcard'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[400],
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
+                  onPressed: _onGenera,
+                  icon: const Icon(CupertinoIcons.sparkles),
+                  label: const Text('Genera le flashcard'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple[400],
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 15,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
         ],
       ),
     );
