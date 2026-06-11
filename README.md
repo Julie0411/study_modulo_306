@@ -32,7 +32,7 @@ Se Flutter segnala problemi, risolvili prima di continuare.
 1. Clona o scarica il progetto.
 
 ```bash
-git clone <url-del-repository>
+git clone https://github.com/Julie0411/study_modulo_306.git
 cd study_modulo_306
 ```
 
