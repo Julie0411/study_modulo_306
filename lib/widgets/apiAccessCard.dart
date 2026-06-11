@@ -126,27 +126,27 @@ class _ApiAccessCardState extends State<ApiAccessCard> {
           ),
           SizedBox(height: 25),
           _isLoading
-              ? CircularProgressIndicator(color: Colors.deepPurple)
-              : ElevatedButton.icon(
-                  onPressed: _onGenera,
-                  icon: const Icon(CupertinoIcons.sparkles),
-                  label: const Text('Genera le flashcard'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple[400],
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 15,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+            ? CircularProgressIndicator(color: Colors.deepPurple)
+            : ElevatedButton.icon(
+                onPressed: _onGenera,
+                icon: const Icon(CupertinoIcons.sparkles),
+                label: const Text('Genera le flashcard'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple[400],
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+              ),
         ],
       ),
     );

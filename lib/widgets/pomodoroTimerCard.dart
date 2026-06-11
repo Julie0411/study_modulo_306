@@ -6,7 +6,6 @@ class PomodoroTimerCard extends StatefulWidget {
 
   @override
   State<PomodoroTimerCard> createState() => _PomodoroTimerCardState();
-
 }
 
 class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
